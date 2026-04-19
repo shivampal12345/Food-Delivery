@@ -11,6 +11,7 @@ const StoreContextProvider =(props) =>{
     const url = 'https://food-delivery-backend-2x4y.onrender.com'
     const [token,setToken] = useState("");
     const[food_list, setFoodList] = useState([]);
+    const [search, setSearch] = useState("");
 
     const addToCart =async (itemId) => {
         if(!cartItem[itemId]){
@@ -79,7 +80,9 @@ const StoreContextProvider =(props) =>{
         getTotalCartAmount,
         url,
         token,
-        setToken
+        setToken,
+        search,
+        setSearch
     }
 
     return (

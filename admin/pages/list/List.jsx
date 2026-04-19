@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import axios from "axios";
 import {toast }from 'react-toastify'
 import './List.css'
@@ -7,7 +7,7 @@ const List = () => {
   const url = import.meta.env.VITE_API_URL;
   const[list,setList] = useState([]);
 
-  const fetchList = async () =>{
+  const fetchList = useCallback(async () =>{
     const response = await axios.get(`${url}/api/food/list`);
     // console.log(response.data)
     if(response.data.success){
@@ -15,7 +15,7 @@ const List = () => {
     }else{
       toast.error("Error")
     }
-  };
+  }, [url]);
 
   const removeFood = async(foodID)=>{
       const response = await axios.post(`${url}/api/food/remove`,{id:foodID});
@@ -29,7 +29,7 @@ const List = () => {
 
   useEffect(()=>{
     fetchList();
-  },[])
+  },[fetchList])
   return (
     <div className='list add flex-col'>
       <p>All Foods List</p>

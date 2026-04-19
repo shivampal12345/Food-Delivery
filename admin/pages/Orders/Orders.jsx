@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useCallback } from 'react'
 import './Order.css'
 import { useState } from 'react';
 import axios from 'axios';
@@ -10,7 +10,7 @@ const Orders = ({url}) => {
 
   const [orders,setOrders] = useState([]);
 
-  const fetchAllOrders = async()=>{
+  const fetchAllOrders = useCallback(async()=>{
     const response = await axios.get(url+"/api/order/list");
     if(response.data.success){
       setOrders(response.data.data);
@@ -18,7 +18,7 @@ const Orders = ({url}) => {
     }else{
       toast.error("Error")
     }
-  }
+  }, [url]);
 
   const statusHandler = async(event,orderId) =>{
       // console.log(event,orderId);
@@ -33,7 +33,7 @@ const Orders = ({url}) => {
 
   useEffect(()=>{
     fetchAllOrders();
-  },[]);
+  },[fetchAllOrders]);
 
 
 

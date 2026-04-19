@@ -42,12 +42,25 @@
 .navbar li{
     cursor: pointer;
 }
-.navbar-search-icon{
-    position: relative;
+.navbar-search{
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
-.navbar-search-icon .dot{
-    position: absolute;
-    min-width: 10px;
+.navbar-search img{
+    cursor: pointer;
+}
+.navbar-search input{
+    width: 200px;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+    background: white;
+}
+.navbar-search input:focus{
+    border-color: tomato;
+}
     min-height: 10px;
     background-color: tomato;
     border-radius: 5px;

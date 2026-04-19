@@ -7,8 +7,9 @@ import StoreContext from '../../Context/StoreContext';
 const Navbar = ({setShowLogin}) => {
 
     const[menu,setMenu] = useState("home");
-    const {getTotalCartAmount,token,setToken} = useContext(StoreContext);
+    const {getTotalCartAmount,token,setToken, search, setSearch} = useContext(StoreContext);
     const navigate = useNavigate();
+    const [showSearch, setShowSearch] = useState(false);
     const logout = ()=>{
       localStorage.removeItem("token");
       setToken("");
@@ -28,7 +29,10 @@ const Navbar = ({setShowLogin}) => {
             <a href='#footer' onClick={()=>setMenu("contact-us")} className={menu==="contact-us"?"active":""}>contact us</a>
         </ul>
         <div className="navbar-right">
-            <img src={assets.search_icon} alt="" />
+            <div className="navbar-search">
+                <img src={assets.search_icon} alt="" onClick={() => setShowSearch(!showSearch)} />
+                {showSearch && <input type="text" placeholder="Search foods..." value={search} onChange={(e) => setSearch(e.target.value)} />}
+            </div>
             <div className="navbar-search-icon">
                <Link to='/cart'><img src={assets.basket_icon} alt="" /></Link> 
                 <div className={getTotalCartAmount()===0?"":"dot"}></div>
