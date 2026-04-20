@@ -5,7 +5,8 @@ import axios from 'axios';
 import { assets } from '../../assets/frontend_assets/assets';
 
 const MyOrders = () => {
-    const{url,token} = useContext(StoreContext);
+    const contextValue = useContext(StoreContext) || {};
+    const {url = "", token = ""} = contextValue;
     const [data,setData] = useState([]);
 
     const fetchOrders = async()=>{
@@ -24,11 +25,11 @@ const MyOrders = () => {
     <div className='my-orders'>
         <h2>My Orders</h2>
         <div className="container">
-            {data.map((order,index)=>{
+            {(data || []).map((order,index)=>{
                 return (
                     <div key={index} className='my-orders-order'>
                         <img src={assets.parcel_icon} alt="" />
-                        <p>{order.items.map((item,index)=>{
+                        <p>{(order.items || []).map((item,index)=>{
                             if(index===order.items.length-1){
                                 return item.name+"x"+item.quantity;
                             }else{

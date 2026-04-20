@@ -61,21 +61,35 @@
 .navbar-search input:focus{
     border-color: tomato;
 }
+
+.navbar-search-icon{
+    position: relative;
+}
+
+.dot{
+    width: 10px;
     min-height: 10px;
     background-color: tomato;
     border-radius: 5px;
+    position: absolute;
     top: -8px;
     right: -8px;
 }
 
 .navbar-profile{
     position: relative;
+    cursor: pointer;
 }
 .nav-profile-dropdown{
     position: absolute;
     display: none;
     right: 0;
-    z-index: 1;
+    top: 100%;
+    margin-top: -10px;
+    z-index: 1000;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
 }
 .navbar-profile:hover .nav-profile-dropdown{
     display: flex;
@@ -87,6 +101,8 @@
     border: 1px solid tomato;
     outline: 2px solid white;
     list-style: none;
+    pointer-events: auto;
+    opacity: 1;
 }
 .nav-profile-dropdown li{
     display: flex;
